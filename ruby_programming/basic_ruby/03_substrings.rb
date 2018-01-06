@@ -1,10 +1,11 @@
 
 def substrings (string, dictionary)
   results = {}
-  string.downcase.scan(/\w/).each_with_index do |start_letter, start_index|
-    string.downcase.scan(/\w/).each_with_index do |end_letter, end_index|
-      word = string[start_index..end_index]
-      if start_index < end_index && dictionary.include?(word)
+  string.downcase.scan(/\w/).each_with_index do |start_letter, index1|
+    string.downcase.scan(/\w/).slice(index1 + 1..-1).each_with_index do |end_letter, index2|
+      end_index = index1 + 1 + index2
+      word = string[index1..end_index]
+      if dictionary.include?(word)
         results[word] ? results[word] += 1 : results[word] = 1
       end
     end
